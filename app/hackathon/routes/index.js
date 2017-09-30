@@ -46,7 +46,7 @@ router.post('/', type, function (req,res) {
             // results is an array consisting of messages collected during execution
             console.log('results: %j', results);
 
-            fs.unlink(tmp_path); res.render('index', { title: results, img: req.file.originalname });
+            fs.unlink(tmp_path); res.render('index', { results: results, img: req.file.originalname });
         });
       });
       src.on('error', function(err) {
