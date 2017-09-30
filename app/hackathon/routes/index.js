@@ -41,12 +41,14 @@ router.post('/', type, function (req,res) {
             args: []
         };
 
+        fs.unlink(tmp_path);
+
         PythonShell.run('neuralNet.py', options, function (err, results) {
             if (err) throw err;
             // results is an array consisting of messages collected during execution
             console.log('results: %j', results);
 
-            fs.unlink(tmp_path); res.render('index', { results: results, img: req.file.originalname });
+            res.render('index', { results: results, img: req.file.originalname });
         });
       });
       src.on('error', function(err) {

@@ -49,7 +49,13 @@ for filename in os.listdir(unknown_pictures_dir):
         continue
     unknown_face_name = filename.replace(".jpg", "")
     unknown_face_image = face_recognition.load_image_file(unknown_pictures_dir + "/" + filename)
-    unknown_face_dictionary[unknown_face_name] = face_recognition.face_encodings(unknown_face_image)[0]
+    try:
+        unknown_face_dictionary[unknown_face_name] = face_recognition.face_encodings(unknown_face_image)[0]
+    except Exception as e:
+        print (e)
+        badPics.write(unknown_face_name + "\n")
+        badPics.flush()
+    os.remove(os.path.join(os.path.dirname(__file__), "unknown_pictures") + "/" + filename)
 
 
 #Check unknown faces
