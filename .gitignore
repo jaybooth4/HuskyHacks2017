@@ -1,0 +1,5 @@
+.DS_STORE
+app/node_modules
+app/npm-debug.log
+.idea
+hackathon.iml

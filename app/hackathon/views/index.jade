@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+
+  form(method="post", enctype="multipart/form-data", action="/", onclick="spinner()")
+    input(type="file" name="recfile")
+    input(type="submit" value="Submit")
+    div(class="spinner", id="loader", style="display: none")
+      - for(var i = 0; i < 5; i++)
+        div(class="rect#{i}", style="margin-right:1px")
+
+  script.
+    function spinner() {
+        document.getElementById("loader").style.display = "block";
+    }
+
+  img(src="/images/#{img}")
