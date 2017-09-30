@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var multer  = require('multer');
-var upload = multer({ dest: 'public/images' });
+var upload = multer({ dest: 'python_modules/unknown_pictures' });
 var PythonShell = require('python-shell');
 var fs = require('fs');
 
@@ -26,7 +26,7 @@ router.post('/', type, function (req,res) {
 
       /** The original name of the uploaded file
           stored in the variable "originalname". **/
-      var target_path = 'public/images/' + req.file.originalname;
+      var target_path = 'python_modules/unknown_pictures/' + req.file.originalname;
 
       /** A better way to copy the uploaded file. **/
       var src = fs.createReadStream(tmp_path);
