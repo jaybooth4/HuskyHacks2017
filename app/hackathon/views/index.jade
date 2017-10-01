@@ -12,19 +12,27 @@ block content
 
   img(src="/images/#{img}", width="400", height="400")
   div(style="display: inline-block")
-    canvas(id="myChart" width="400" height="400")
+    canvas(id="myChart" width="600" height="400")
 
   script.
     console.log('#{results}');
+    console.log('#{results}'.replace(/&quot;/g, "\""));
+    var balls = JSON.parse('#{results}'.replace(/&quot;/g, "\""));
+
+    topFour = Object.assign(...sortProperties(balls).slice(0,4).map(d => ({[d[0]]: d[1]})));
+    console.log(topFour)
+
+
+
 
     var ctx = document.getElementById("myChart").getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            labels: Object.keys(topFour),
             datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                label: '% Confidence',
+                data: Object.values(topFour),
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -57,4 +65,20 @@ block content
 
     function spinner() {
         document.getElementById("loader").style.display = "inline-block";
+    }
+
+    function sortProperties(obj)
+    {
+      // convert object into array
+    	var sortable=[];
+    	for(var key in obj)
+    		if(obj.hasOwnProperty(key))
+    			sortable.push([key, obj[key]]); // each item is an array in format [key, value]
+
+    	// sort items by value
+    	sortable.sort(function(a, b)
+    	{
+    	  return b[1]-a[1]; // compare numbers
+    	});
+    	return sortable; // array in format [ [ key1, val1 ], [ key2, val2 ], ... ]
     }

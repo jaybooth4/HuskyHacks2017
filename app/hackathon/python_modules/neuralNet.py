@@ -61,7 +61,7 @@ for filename in os.listdir(unknown_pictures_dir):
 #Check unknown faces
 known_face_encodings = list(known_face_dictionary.values())
 known_face_names = list(known_face_dictionary.keys())
-threshold = .5
+threshold = .65
 for unknown_face in unknown_face_dictionary.keys():
     unknown_face_encoding = unknown_face_dictionary[unknown_face]
     # results = face_recognition.compare_faces(known_face_encodings, unknown_face_encoding)
