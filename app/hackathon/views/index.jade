@@ -3,17 +3,12 @@ extends layout
 block content
   h1= title
 
-  form(method="post", enctype="multipart/form-data", action="/", onclick="spinner()", style="margin: 10px")
+  form(method="post", enctype="multipart/form-data", action="/", onsubmit="spinner()", style="margin: 10px")
     input(type="file" name="recfile")
     input(type="submit" value="Submit" class="waves-effect waves-light btn")
     div(class="spinner", id="loader", style="display: none")
       - for(var i = 0; i < 5; i++)
         div(class="rect#{i}", style="margin-right:1px")
-
-  script.
-    function spinner() {
-        document.getElementById("loader").style.display = "block";
-    }
 
   img(src="/images/#{img}", width="400", height="400")
   div(style="display: inline-block")
@@ -57,3 +52,7 @@ block content
             }
         }
     });
+
+    function spinner() {
+        document.getElementById("loader").style.display = "inline-block";
+    }

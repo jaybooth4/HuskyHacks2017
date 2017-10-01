@@ -33,6 +33,11 @@ router.post('/', type, function (req,res) {
       var dest = fs.createWriteStream(target_path);
       src.pipe(dest);
       src.on('end', function() {
+        src = fs.createReadStream(target_path);
+        target_path2 = 'public/images/' + req.file.originalname;
+        dest = fs.createWriteStream(target_path2);
+        src.pipe(dest);
+
         var options = {
             mode: 'text',
             pythonPath: '/usr/local/bin/python3',
