@@ -53,7 +53,7 @@ router.post('/', type, function (req,res) {
             // results is an array consisting of messages collected during execution
             console.log('results: %j', results);
 
-            res.render('index', { results: results, img: req.file.originalname });
+            res.render('index', { title: "Upload complete", results: results, img: req.file.originalname });
         });
       });
       src.on('error', function(err) {
